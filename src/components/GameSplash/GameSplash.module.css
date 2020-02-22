@@ -1,0 +1,27 @@
+.container {
+    padding: 0 16px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+.splash {
+    position: relative;
+
+    padding-top: 100%;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+.stub {
+    background-color: #fff;
+}

@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/xo_front/static/css/main.8de66f8b.chunk.css",
-    "main.js": "/xo_front/static/js/main.5fd0b79b.chunk.js",
-    "main.js.map": "/xo_front/static/js/main.5fd0b79b.chunk.js.map",
+    "main.css": "/xo_front/static/css/main.c3a3a422.chunk.css",
+    "main.js": "/xo_front/static/js/main.db25ccf1.chunk.js",
+    "main.js.map": "/xo_front/static/js/main.db25ccf1.chunk.js.map",
     "runtime-main.js": "/xo_front/static/js/runtime-main.8eb7f896.js",
     "runtime-main.js.map": "/xo_front/static/js/runtime-main.8eb7f896.js.map",
-    "static/js/2.5f982b7f.chunk.js": "/xo_front/static/js/2.5f982b7f.chunk.js",
-    "static/js/2.5f982b7f.chunk.js.map": "/xo_front/static/js/2.5f982b7f.chunk.js.map",
+    "static/js/2.0164a8cd.chunk.js": "/xo_front/static/js/2.0164a8cd.chunk.js",
+    "static/js/2.0164a8cd.chunk.js.map": "/xo_front/static/js/2.0164a8cd.chunk.js.map",
     "index.html": "/xo_front/index.html",
-    "precache-manifest.a90d4ff4f14a2057de4245d7704dd002.js": "/xo_front/precache-manifest.a90d4ff4f14a2057de4245d7704dd002.js",
+    "precache-manifest.17b9d04756b0a5424766d9d495e9b7d2.js": "/xo_front/precache-manifest.17b9d04756b0a5424766d9d495e9b7d2.js",
     "service-worker.js": "/xo_front/service-worker.js",
-    "static/css/main.8de66f8b.chunk.css.map": "/xo_front/static/css/main.8de66f8b.chunk.css.map",
-    "static/js/2.5f982b7f.chunk.js.LICENSE.txt": "/xo_front/static/js/2.5f982b7f.chunk.js.LICENSE.txt",
-    "static/media/game.png": "/xo_front/static/media/game.7cfa0804.png"
+    "static/css/main.c3a3a422.chunk.css.map": "/xo_front/static/css/main.c3a3a422.chunk.css.map",
+    "static/js/2.0164a8cd.chunk.js.LICENSE.txt": "/xo_front/static/js/2.0164a8cd.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8eb7f896.js",
-    "static/js/2.5f982b7f.chunk.js",
-    "static/css/main.8de66f8b.chunk.css",
-    "static/js/main.5fd0b79b.chunk.js"
+    "static/js/2.0164a8cd.chunk.js",
+    "static/css/main.c3a3a422.chunk.css",
+    "static/js/main.db25ccf1.chunk.js"
   ]
 }

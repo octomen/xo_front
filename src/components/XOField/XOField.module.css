@@ -1,0 +1,23 @@
+.container {
+    display: grid;
+
+    grid-template-columns: repeat(var(--xo-game-height), 1fr);
+    grid-template-rows: repeat(var(--xo-game-width), 1fr);
+}
+
+.container > div {
+    box-sizing: border-box;
+}
+
+.container > div {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.container > div:nth-child(3n) {
+    border-right: none;
+}
+
+.container > div:nth-child(n + 7) {
+    border-bottom: none;
+}

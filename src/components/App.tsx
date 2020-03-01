@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GameSplash from './GameSplash/GameSplash';
+import XOGame from './XOGame/XOGame';
 
 import styles from './App.module.css';
 
@@ -8,9 +8,9 @@ function App() {
     return (
         <div className={styles.app}>
             <header className={styles.header}>
-                XO games are coming
+                Величайшая победа – победа над самим собой!
             </header>
-            <GameSplash/>
+            <XOGame />
         </div>
     );
 }

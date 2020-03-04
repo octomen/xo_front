@@ -2,7 +2,7 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import { mix } from '../../helpers/classnames';
-import { XOElementType } from '../../helpers/game';
+import { BoardElements } from '../../helpers/gameWebsocket';
 
 import styles from './XOElement.module.css';
 
@@ -16,7 +16,7 @@ const classes = {
 };
 
 export type Props = {
-    type?: XOElementType
+    type?: BoardElements
 };
 const XOElement: React.FC<Props> = ({ type }) => {
     return (
@@ -28,7 +28,7 @@ const XOElement: React.FC<Props> = ({ type }) => {
             classNames={classes}
         >
             <div className={mix(styles.element, type && styles[type])}>
-                {type ? type === XOElementType.O ? 'O' : 'X' : '' }
+                {type ? type === BoardElements.O ? 'O' : 'X' : '' }
             </div>
         </CSSTransition>
     );

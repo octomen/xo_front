@@ -1,28 +1,23 @@
-import React, { useCallback, useState } from 'react';
-
-import styles from './XOGame.module.css';
+import React, { useCallback } from 'react';
 
 import XOField from '../XOField/XOField';
 import XOElement from '../XOElement/XOElement';
-import {
-    GameState,
-    GameStateStatus,
-    generatePosition,
-    getGameState,
-    XOElementType,
-    XOGameField,
-} from '../../helpers/game';
-import { mix } from '../../helpers/classnames';
 
-const generateElementKey = (x: number, y: number, type?: XOElementType) => (
-    `${generatePosition(x, y)}${type ? `-${type}` : ''}`
-);
+import { mix } from '../../helpers/classnames';
+import { BoardElements, GameStatus, removeGameWebsocket, sendGameMove } from '../../helpers/gameWebsocket';
+import { useGame } from '../../hooks/useGame';
+
+import styles from './XOGame.module.css';
+
+const generateElementKey = (x: number, y: number, type: BoardElements) => `${x}-${y}-${type}`;
+
+const isGameFinished = (status: GameStatus) => [GameStatus.Lose, GameStatus.Won].includes(status);
 
 type ElementProps = {
     x: number;
     y: number;
+    type: BoardElements;
     onClick: (x: number, y: number) => void;
-    type?: XOElementType;
     className?: string;
 };
 const Element: React.FC<ElementProps> = props => {
@@ -43,47 +38,50 @@ const Element: React.FC<ElementProps> = props => {
         </div>
     );
 };
-
-const XOGame: React.FC = () => {
-    const [gameState, setGameState] = useState<GameState>({ status: GameStateStatus.Process });
-    const [symbol, setSymbol] = useState(XOElementType.X);
-    const [game, setGame] = useState<XOGameField>({});
+type Props = {
+    id: string;
+    onGameCreate: () => void;
+}
+const XOGame: React.FC<Props> = ({ id, onGameCreate }) => {
+    const game = useGame(id);
 
     const onElementClick = useCallback((x: number, y: number) => {
-        const position = generatePosition(x, y);
-
-        if (game[position] || gameState.status === GameStateStatus.Cancelled) {
+        if (!game) {
             return;
         }
 
-        const updatedGame = { ...game, [position]: symbol };
+        const { board } = game;
+        const element = board[y][x];
 
-        setGame(updatedGame);
-        setSymbol(symbol === XOElementType.O ? XOElementType.X : XOElementType.O);
-        setGameState(getGameState(updatedGame));
-    }, [game, gameState.status, symbol, setSymbol, setGame, setGameState]);
+        if (element !== BoardElements.N || isGameFinished(game.status)) {
+            return;
+        }
+
+        sendGameMove(id, [x, y]);
+    }, [game, id]);
 
     const renderElement = useCallback((x: number, y: number) => {
-        const position = generatePosition(x, y);
-        const isOnWinnerRange = ('range' in gameState) &&
-            gameState.range.some(key => key === position);
+        if (!game) {
+            return null;
+        }
 
         return (
             <Element
-                key={generateElementKey(x, y, game[position])}
+                key={generateElementKey(x, y, game.board[y][x])}
                 x={x}
                 y={y}
-                type={game[position]}
+                type={game.board[y][x]}
                 onClick={onElementClick}
-                className={isOnWinnerRange ? styles['winner-element'] : ''}
+                className={isGameFinished(game.status) ? styles['winner-element'] : ''}
             />
         );
-    }, [game, onElementClick, gameState.status]);
+    }, [game, onElementClick]);
 
     const onRestartGame = useCallback(() => {
-        setGameState({ status: GameStateStatus.Process });
-        setGame({});
-    }, [setGame]);
+        removeGameWebsocket(id);
+
+        onGameCreate();
+    }, [id, onGameCreate]);
 
     return (
         <div className={styles.game}>
@@ -92,16 +90,17 @@ const XOGame: React.FC = () => {
                 height={3}
                 renderElement={renderElement}
             />
-            {gameState.status === GameStateStatus.Cancelled && (
-                <div className={styles['game-info']}>
-                    {('winner' in gameState) && (
-                        <div className={styles.winner}>
-                            Победили {gameState.winner.toUpperCase()}
-                        </div>
-                    )}
-                    <button onClick={onRestartGame} className={styles.restart}>Играть заново</button>
-                </div>
-            )}
+            <div className={styles['game-info']}>
+                {game && isGameFinished(game.status) && (
+                    <div className={styles.winner}>
+                        {game.status === GameStatus.Won ?
+                            'Вы победили!' :
+                            'Вы проиграли'
+                        }
+                    </div>
+                )}
+                <button onClick={onRestartGame} className={styles.restart}>Играть заново</button>
+            </div>
         </div>
     );
 };

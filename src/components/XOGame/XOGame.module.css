@@ -67,3 +67,7 @@
     background-color: #1da1f2;
 
 }
+
+.restart:active {
+    background-color: #1d82d1;
+}

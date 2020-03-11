@@ -35,6 +35,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "src/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_HOST: "134.209.234.228"
+          REMOTE_USER: "ubuntu"
           # TARGET: ${{ secrets.REMOTE_TARGET }}
